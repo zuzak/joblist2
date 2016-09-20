@@ -4,10 +4,15 @@
   "description": "why should GDS have all the fun",
   "main": "server.js",
   "scripts": {
-    "test": "npm run lint && npm run mocha",
-    "mocha": "NODE_ENV='test' node_modules/mocha/bin/mocha test/*.js",
     "coverage": "NODE_ENV='test' node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec && xdg-open coverage/lcov-report/index.html&",
-    "lint": "node_modules/standard/bin/cmd.js --verbose | node_modules/snazzy/bin/cmd.js"
+    "coverage-codacy": "cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage",
+    "coverage-coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "coverage-gen": "NODE_ENV='test' istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec",
+    "coverage-push": "npm run coverage-gen && npm run coverage-coveralls && npm run coverage-codacy",
+    "lint": "node_modules/standard/bin/cmd.js --verbose | node_modules/snazzy/bin/cmd.js",
+    "mocha": "NODE_ENV='test' node_modules/mocha/bin/mocha test/*.js",
+    "test": "npm run lint && npm run mocha",
+    "validate": "npm ls"
   },
   "repository": {
     "type": "git",
@@ -31,8 +36,11 @@
     "sort-object": "^3.0.2"
   },
   "devDependencies": {
+    "codacy-coverage": "^2.0.0",
+    "coveralls": "^2.11.14",
     "istanbul": "^0.4.5",
     "mocha": "^3.0.2",
+    "mocha-lcov-reporter": "^1.2.0",
     "should": "^11.1.0",
     "snazzy": "^5.0.0",
     "standard": "^8.1.0",
