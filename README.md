@@ -10,3 +10,5 @@ npm start
 
 To test, `npm test`
 
+The server should be listening on port 3000,
+so point your favourite browser towards http://localhost:3000/
