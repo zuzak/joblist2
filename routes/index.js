@@ -5,6 +5,7 @@
  */
 
 require('./applicants.js')
+require('./about.js')
 
 // this must be last:
 require('./error.js')

@@ -1,0 +1,124 @@
+extends skeleton
+block breadcrumb
+  li
+    a(href='/about-this-website') About
+block content
+  h1.heading-large About this website
+  p.lede
+    span The code for this website is available on&nbsp;
+    a(href="//github.com/zuzak/joblist2") GitHub
+    span .
+  .grid-row
+    .column-two-thirds
+      p.
+        This website was created as part of a job recruitment process.
+        It is the second iteration: there is also a
+        <a href="//github.com/zuzak/joblist">previous iteration</a>,
+        as a similar near-simultaneous job application had the same brief.
+      p.
+        Between these two projects, a GOV.UK ripoff was created to practice
+        using the GOV.UK toolkit, which is where much of the difference between
+        the two projects lies. It is available as
+        <a href="//github.com/zuzak/gov.zk">gov.zk</a>.
+      h2.heading-medium Credits
+      details
+        summary
+          span.summary Codebase licence
+        .panel.panel-border-narrow
+          h3.heading-small The MIT Licence
+          p Copyright &copy; 2016 Douglas Gardner
+          p.
+            Permission is hereby granted, free of charge to any person
+            obtaining a copy of this software and associated documentation
+            files (the "Software"), to deal in the Software without restriction,
+            including without limitation the rights to use, copy, modify, merge,
+            publish, distribute, sublicense, and/or sell copies of the Software,
+            and to permit persons to whom the Software is furnished to do so,
+            subject to the following conditions:
+          ul.list.list-bullet
+            li.
+              The above copyright notice and this permission notice
+              shall be included in all copies or substantial portions
+              of the Software.
+          strong.bold-xsmall.
+            The Software is provided "as is", without warranty
+            of any kind, express or implied, including but not
+            limited to the warranties of merchantability,
+            fitness for a particular purpose and
+            noninfringement. In no event shall the authors or
+            copyright holders be liable for any claim, damages
+            or other liability, whether in an action of
+            contract, tort or otherwise, arising from, out of
+            or in connection with the Software or the use or
+            other dealings in the Software.
+      if contributors.length > 0
+        h3.heading-small Contributors
+        p The following people committed the code that runs this site:
+        ul.list.list-bullet
+          for contributor in contributors
+            li #{contributor}
+      h2.heading-medium Third-party credits
+
+      p.
+        The website layout is based upon <a href="//GOV.UK">GOV.UK</a>, which is created by
+        the Government Digital Service, a department of the Cabinet
+        Office. The assets are licensed under the MIT Licence, and are
+        thus freely available.
+
+      details
+        summary
+          span.summary #{Object.keys(dependencies).length} dependencies (#{coreDeps.length} direct)
+        table.table-font-xsmall
+          thead
+            tr
+              th Name
+              th Version
+              th Licence
+              th Description
+          tbody
+            for dependency in dependencies
+              if typeof dependency !== 'undefined'
+                if dependency.name
+                  tr
+                    td
+                      if dependency.repositories.length > 0
+                        for repo in dependency.repositories
+                          if repo.substring(0, 4) === 'git+'
+                            - repo = repo.substring(4)
+                          if coreDeps.indexOf(dependency.name) !== -1
+                            strong
+                              a(href=repo)= dependency.name
+                          else
+                            a(href=repo)= dependency.name
+                      else
+                        =dependency.name
+                    td= dependency.versions.join(' / ')
+                    if dependency.licenses.length > 0
+                      td= dependency.licenses.join('/')
+                    else
+                      td &mdash;
+                    td= dependency.description
+      h3.heading-medium Git information
+      p This website is currently running on <strong>#{state.branch}</strong>.
+      p
+        span The current Git commit hash is&nbsp;
+        if state.ahead === 0
+          a.code(href='https://github.com/zuzak/gov.zk/commit/' + hash)= hash
+        else
+          span.code= hash
+      if state.issues
+        .grid-row
+          .column.column-one-third
+              p.data
+                .bold-xlarge #{state.dirty}
+                .bold-xsmall changed files
+          .column.column-one-third
+              p.data
+                .bold-xlarge #{state.untracked}
+                .bold-xsmall untracked files
+          .column.column-one-third
+              p.data
+                .bold-xlarge #{state.ahead}
+                .bold-xsmall unpushed commits
+      else
+        p There are no outstanding code changes to push upstream.
