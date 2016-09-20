@@ -110,3 +110,10 @@ describe('applicants list', function () {
       })
   })
 })
+describe('about page', function () {
+  it('should work', function (done) {
+    request(app)
+      .get('/about-this-website')
+      .expect(200, done)
+  })
+})
