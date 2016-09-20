@@ -1,0 +1,59 @@
+// prefix for images and things
+$path: "/";
+
+// override font from Transport to a Google font that looks vaguely similar
+$toolkit-font-stack: "Nunito", sans-serif;
+@import 'https://fonts.googleapis.com/css?family=Nunito:300';
+// a bug in govuk-elements prevents unclassed elements from getting the
+// overridden font stack; I passed a fix upstream, but it's not pushed to NPM
+// https://github.com/alphagov/govuk_elements/commit/ca0aad5785d82e68aa
+
+// import govuk-elements, which somewhere pulls in the frontend toolkit
+@import 'govuk-elements';
+
+// import base GOV.UK styles (as we're not using the GOV.UK template itself)
+@import 'elements/govuk-template-base';
+
+// shamelessly ape GOV.UK
+header {
+	background-color: $text-colour;
+	color: $page-colour;
+}
+
+.header .logo {
+	color: inherit; // don't turn blue
+	text-decoration: inherit; // don't underline
+	text-transform: uppercase;
+}
+.header .logo:hover {
+	text-decoration: underline;
+}
+
+.header, .footer {
+	@extend %site-width-container;
+}
+
+footer {
+	background-color: $panel-colour;
+	border-top: 1px solid $secondary-text-colour;
+	color: $secondary-text-colour;
+	// cheap, if hackish, way to extend the bg color all the way to the bottom
+	box-shadow: 0 50em 0 50em $panel-colour;
+}
+
+.footer a {
+	text-align: center;
+	display: inline-block; // make it easy to click
+	color: inherit;
+	padding: 1em;
+}
+
+.accent-bar {
+	background-color: $home-office; // this is the worst departmental colour
+	height: 0.5em;
+	width: 100%;
+}
+
+.stack {
+	overflow: scroll;
+}

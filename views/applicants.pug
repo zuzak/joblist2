@@ -1,0 +1,15 @@
+extends skeleton
+block title
+  title Applicant List
+block content
+  h1.heading-xlarge Applicant List
+  p.lede.
+    Below are the applicants for this vacancy.
+  ul.list.list-bullet
+    for applicant in applicants
+      - data = db.getRecord(applicant)
+      li
+        a(href='/applicant/'+applicant)
+          span= data.name.forenames.join(' ')
+          span &nbsp;
+          span.surname= data.name.surname

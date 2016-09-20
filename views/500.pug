@@ -1,0 +1,13 @@
+extends error
+block heading
+  span 500: Server Error
+block prose
+  p Something went wrong. It wasn't your fault.
+  if err
+    details(open)
+      summary
+        span.summary Technical information
+      pre.code.stack= err.stack
+  else
+    //- we're on production or something
+    p We do not have any more information.

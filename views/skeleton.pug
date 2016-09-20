@@ -1,0 +1,36 @@
+//- Initial framework upon which all pages are based
+doctype html
+html
+  head
+    block title
+    block css
+      //- global stylesheets
+      //- others can be appended to this block
+      link(rel='stylesheet', href='/index.css')
+  body
+    header
+      block header
+        .header
+            .font-xlarge
+              a.logo(href='/') &#9819;
+    #content
+      block banner
+        .accent-bar
+        include banner.pug
+      block breadcrumbs
+        .breadcrumbs
+          ol
+            li
+              a(href='/') Home
+            block breadcrumb
+      block content
+    footer
+      .footer
+        block footer
+          .grid-row
+            p.column-two-thirds
+              span
+            p.column-one-third
+              a(href='/about-this-website') About this website
+
+//- Used for testing: [squeamish ossifrage]

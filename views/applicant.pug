@@ -1,0 +1,43 @@
+extends skeleton
+block append css
+  link(rel='stylesheet', href='/applicants.css')
+block breadcrumb
+  li= applicant.name.surname
+block title
+  title= applicant.name.surname
+block content
+  h1.heading-large
+    span= applicant.name.forenames.join(' ')
+    //- a shortcoming of pug:
+    span &nbsp;
+    span.surname= applicant.name.surname
+  .grid-row
+    .column.column-two-thirds
+      h2.heading-small Experience
+      - isStr = typeof applicant.experience === 'string'
+      if isStr
+        - paragraphs = applicant.experience.split('\n')
+        each paragraph in paragraphs
+          p= paragraph
+      else
+        for experience in applicant.experience
+          p= experience
+    .column.column-one-third
+      table
+        tr
+          th
+            abbr(title='Date of Birth') DoB:
+          td= applicant.dob
+        if applicant.name.aka
+          tr
+            th
+              abbr(title='Also known as') AKA:
+            if applicant.name.aka.length > 1
+              td
+                ul.list.list-bullet
+                  for aka in applicant.name.aka
+                    li= aka
+            else
+              td= applicant.name.aka
+
+
