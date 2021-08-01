@@ -31,8 +31,8 @@
     "githash": "0.0.4",
     "govuk-elements-sass": "^2.0.0",
     "govuk_frontend_toolkit": "^4.18.1",
-    "node-sass-middleware": "^0.9.8",
-    "pug": "^2.0.0-beta6",
+    "node-sass-middleware": "^0.10.1",
+    "pug": "^3.0.1",
     "sort-object": "^3.0.2"
   },
   "devDependencies": {
